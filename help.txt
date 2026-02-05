@@ -1,0 +1,11 @@
+sudo apt install NAME
+cd/ls
+python3 -m venv venv - создает виртуальное окружение
+source venv/bin/activate - активация виртуального окружения
+touch {filename}
+
+
+
+ctrl+j - открывает терминал
+ctrl+b - открывает/закрывает боковую панель
+ctrl+c - закрывает приложение(останавливается)
