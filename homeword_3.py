@@ -6,15 +6,6 @@ def app(page: ft.Page):
     # button = ft.Button(content="Кнопка")
     plain_text = ft.Text(value="Hello world!")
     # page.theme_mode = ft.ThemeMode.LIGHT
-    history = []
-
-    def clear_history(e):
-        history.clear()
-        history_text.value = ""
-
-    delete_button = ft.IconButton(icon=ft.Icons.DELETE, on_click=clear_history)
-
-    history_text = ft.Text()
 
     def change_theme(e):
         if page.theme_mode == ft.ThemeMode.DARK:
@@ -28,15 +19,12 @@ def app(page: ft.Page):
     def change(e):
         txt = user_input.value.strip()
         user_input.value = ""
-        history.append(txt)
-        print(history)
-        history_text.value = "История имен: \n"+", \n".join(history)
-        date = datetime.now().strftime("%Y-%m-%d - %H:%M:%S")
 
         
         if txt:
+            now = datetime.now().strftime("%Y:%m:%d - %H:%M:%S")
             plain_text.color = None
-            plain_text.value = f"{date} - Привет, {txt}!"
+            plain_text.value = f"{now} - Привет, {txt}!"
         else:
             plain_text.value = "Введите правельное имя"
             plain_text.color = ft.Colors.RED
@@ -46,18 +34,11 @@ def app(page: ft.Page):
     # button.color = ft.Colors.GREEN_900
     btn = ft.TextButton("Отправить", on_click=change)
     user_input = ft.TextField(label="enter name", on_submit=change)
-    icon_row = ft.Row([icon_button], aligment=ft.MainAxisAlignment.END)
-    row = ft.Row(
-        [user_input, btn, icon_button ],
-         alignment=ft.MainAxisAlignment.START,
-    )
-
-    main_row = ft.Row([row, icon_row], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
     page.add(
         plain_text,
-        row,
-        history_text,
-        delete_button,
+        user_input,
+        btn,
+        icon_button,
     )
 
 ft.app(app)
